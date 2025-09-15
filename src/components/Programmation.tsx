@@ -24,6 +24,7 @@ interface ProgrammationType {
   periodes: PeriodeType[];
   matieres: MatiereType[];
 }
+
 export default function Programmation() {
   const [data, setData] = useState<ProgrammationType | null>(null);
 
@@ -33,31 +34,47 @@ export default function Programmation() {
       .catch((err) => console.error(err));
   }, []);
 
-  if (!data) return <p>Loading...</p>;
+  if (!data) return <p className="text-center text-gray-500 mt-10">Loading...</p>;
 
   return (
-    <div>
-      <h1>{data.name}</h1>
-      <p>{data.shortDescription}</p>
-      <p><strong>Date :</strong> {new Date(data.date).toLocaleDateString()}</p>
+    <main className="max-w-4xl mx-auto p-6 bg-white shadow rounded-lg mt-8">
+      <h1 className="text-2xl font-bold text-gray-800 mb-2">{data.name}</h1>
+      <p className="text-gray-600 mb-4">{data.shortDescription}</p>
+      <p className="text-sm text-gray-500 mb-6">
+        <span className="font-semibold">Date :</span> {new Date(data.date).toLocaleDateString()}
+      </p>
 
-      <h2>Périodes</h2>
-      <ul>
-        {data.periodes.map((p) => (
-          <li key={p.id} style={{ color: p.color }}>
-            {p.name} ({new Date(p.startDate).toLocaleDateString()} → {new Date(p.endDate).toLocaleDateString()})
-          </li>
-        ))}
-      </ul>
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold text-gray-700 mb-2">Périodes</h2>
+        <ul className="space-y-2">
+          {data.periodes.map((p) => (
+            <li
+              key={p.id}
+              className="p-3 border rounded-lg bg-gray-50 flex justify-between"
+            >
+              <span className="font-medium">{p.name}</span>
+              <span className="text-sm text-gray-500">
+                {new Date(p.startDate).toLocaleDateString()} → {new Date(p.endDate).toLocaleDateString()}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      <h2>Matières</h2>
-      <ul>
-        {data.matieres.map((m) => (
-          <li key={m.id} style={{ color: m.color }}>
-            {m.name}
-          </li>
-        ))}
-      </ul>
-    </div>
+      <section>
+        <h2 className="text-xl font-semibold text-gray-700 mb-2">Matières</h2>
+        <ul className="flex flex-wrap gap-2">
+          {data.matieres.map((m) => (
+            <li
+              key={m.id}
+              className="px-3 py-1 rounded-full text-sm font-medium text-white"
+              style={{ backgroundColor: m.color }}
+            >
+              {m.name}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </main>
   );
 }
