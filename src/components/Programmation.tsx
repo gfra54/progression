@@ -50,10 +50,10 @@ export default function Programmation() {
           {data.periodes.map((p) => (
             <li
               key={p.id}
-              className="p-3 border rounded-lg bg-gray-50 flex justify-between"
+              className={'p-3 border rounded-lg flex justify-between bg-' + p.color}
             >
               <span className="font-medium">{p.name}</span>
-              <span className="text-sm text-gray-500">
+              <span className="text-sm">
                 {new Date(p.startDate).toLocaleDateString()} → {new Date(p.endDate).toLocaleDateString()}
               </span>
             </li>
