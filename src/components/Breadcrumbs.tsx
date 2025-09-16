@@ -1,6 +1,6 @@
 export interface CrumbType {
   label: string;
-  href?: string; // optional
+  href?: string; 
 }
 
 interface BreadcrumbsPropsType {
