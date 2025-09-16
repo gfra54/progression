@@ -9,6 +9,156 @@ L'outil permet de visualiser les apprentissages d'une semaine donnée dans une d
 Voir en ligne sur https://voirprogression.netlify.app/
 
 
+# Utilisation de l'IA
+J'ai eu recours à l'IA (ChatGPT) pour la mise en place initiale du projet: Ça fait un moment que je n'avais pas faire de React, et j'avais fait beaucoup de VueJS depuis, donc pour aller plus vite je lui ai demandé de me guider pour l'initialisation du projet : les fichiers de config, les dossiers, certaines dépendances, certains élements de syntaxe.
+
+J'y ai aussi eu recours dans la création de certaines layout Tailwind histoire de gagner du temps
+
+Et de temps en temps pour me faire expliquer certains messages d'erreur à la compilation ou me mettre à jours sur certains éléments de syntaxe React ou TS
+
+# Restitution
+## 1. Choix techniques
+
+J'ai respecté la consigne en utilisant React avec Typescript. J'ai aussi installé un linter afin de respecter au mieux les normes de rédaction du code dans ce contexte. J'ai fait appels à des components et des views pour structurer mes pages.  J'ai aussi définis mes types globaux dans un dossier dédié afin de pouvoir les partager dans mes composants. 
+
+J'ai choisi d'utiliser Axios pour l'appel à l'API, avec un interceptor, même si je n'avais qu'une requête asynchrone assez simple, et que celà aurai pu être fait avec fetch, mais je voulais créer une bnne base pour anticiper de futurs besoins d'appels asynchrones.
+
+J'ai utilisé Tailwind pour les layouts, j'ai hésité avec Bulma, que j'utilise souvant. C'est un framework peut-être moins puissant mais un peu plus lisible que Tailwind. Mais j'ai finalement opté pour Tailwind car là aussi dans un souci de maintenabilité, si je devais anticiper l'évolution de cette application vers quelque chose de plus complexe, Tailwind serai plus adapté.
+
+J'ai opté pour une internationalisation minimaliste, afin là aussi d'anticiper une future version multilangue de l'outil, et de centraliser les formulations de l'appli à un endroit unique.
+
+## 2. Limites et compromis
+Je n'ai pas forcément tout découpé en composant comme on pourrait l'attendre dans un contexte applicatif. 
+
+Mon internationalisation est très basique et ne permet pas de variables dans les libellés, de gestion du pluriel, etc. Là aussi, pour gagner du temps.
+
+La gestion des période composées de semaines est faite coté front, et ne se base pas sur une donnée venant de l'api (même si elle respecte la définition d'une période donnée dans l'enoncé).
+
+L'api retourne un tableau de matieres, et un tableau de doomaines, ce qui veut dire qu'il peut potentielelment y en avoir plusieurs, mais je n'ai pas du tout géré ce cas et considéré qu'il y avait une seule matière et un seul domaine.
+
+## 3. Améliorations futures
+
+Si j'avais eu plus de temps j'aurai mis en composant plus d'élements, comme les boutons de sélection des périodes par exemple, ou d'autres petits composants d'UI réutilisables. 
+
+J'aurai ajouté un state manager pour embarquer les données dans l'application.
+
+j'aurai pris le temps d'élaborer des tests, et de vérifier l'accessibilité avec des outils d'audit.
+
+J'aurai peut-être aussi opté pour un scroll horizontal de la progression, ou bien une vue calendrier, pour bien ancrer les items de la progressions dans un planning. Je ne sais pas si ce serait judicieux mais je l'aurai envisagé, au moins en mobile
+
+
+J'aurai fait en sorte de gérer des matières multiples et des domaines multiples, si applicable.
+
+Peut-être faire un peu de ménage car au fil de la création de l'appli il y a peut-être des morceaux de code qui au final ne servent pas, ou pourraient être refactorisés pour être moins verbeux ou moins gourmands en ressources 
+
+## 4. Modélisation
+
+### Les tables  
+
+#### Progressions
+
+> découpage chonologique  des enseignements d'une matière (ou d'un domaine)
+
+* `id` (UUID)
+* `name` (string)
+* `shortDescription` (text)
+* `date` (date)
+* Relations :
+  * 1 à n **Periodes**
+  * 1 à n **Matieres**
+
+#### Periodes
+
+> Divisions de l'année scolaire (ex. « Période 1 », « Période 2 »).
+
+* `id` (UUID)
+* `name` (string)
+* `startDate` (date)
+* `endDate` (date)
+* `progressionId` (Lien vers la progression)
+* Relations :
+  * 1 à n **Semaines**
+
+#### Semaines
+
+> Chaque période contient des semaines numérotées.
+
+* `id` (UUID)
+* `name` (string)
+* `startDate` (date)
+* `endDate` (date)
+* `periodeId` (Lien avec ue période)
+* `programmationId` (Lien avec la programmation)
+* Relations :
+  * 1 à n **Items**
+
+#### Matieres
+
+> les matières enseignées (Français, Maths, Histoire-Géo…).
+
+* `id` (UUID)
+* `name` (string)
+* `progressionId` (Lien avec une progression)
+* Relations :
+  * 1 à n **Domaines**
+
+#### Domaines
+
+> Sous-parties d'une matière (ex. en Histoire et Géographie : Histoire).
+
+* `id` (UUID)
+* `name` (string)
+* `matiereId` (Lien avec une matiere)
+* Relations :
+  * 1 à n **Items**
+
+#### Items (Apprentissages pédagogiques)
+
+> Le contenu pédagogique associé à une semaine et un domaine.
+
+* `id` (UUID)
+* `value` (text / HTML riche)
+* `periodeId` (Lien vers une periode)
+* `semaineId` (Lien vers une semaine)
+* `domaineId` (Lien vers un domaine)
+
+#### Programmations
+
+> Liste des notions à enseigner, sans ordre chronologique
+
+* `id` (UUID)
+* `name` (string)
+* `progressionId` (Lien vers une progression)
+
+### Les routes api potentielles 
+
+#### `GET` `/progression/:id`
+détail d'une progression (nom, description, date, periodes, matieres, items). 
+(A noter que la route api fournie dans l'enoncé se nomme `/api/programmations`, mais elle retourne plutôt les données relatives à une progression)
+
+#### `GET` `/progressions/:id/periodes`
+liste des périodes associées à une progression
+
+#### `GET` `/periodes/:id/semaines`
+liste des semaines d'une période.
+
+#### `GET` `/matieres/:id/domaines`
+domaines associés à une matière.
+
+#### `GET` `/domaines/:id/items`
+apprentissages pédagogiques d'un domaine.
+
+#### `POST` `/items`
+créer un nouvel apprentissage pédagogique.
+
+#### `PUT` `/items/:id`
+modifier un apprentissage existant.
+
+#### `DELETE` `/items/:id`
+supprimer.
+
+Et bien d'autres...
+
 # Installation
 
 Cloner le dépot puis lancer
