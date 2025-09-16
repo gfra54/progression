@@ -1,11 +1,14 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Programmation from './components/Programmation';
 
-function App() {
+export default function App() {
   return (
-    <div>
-      <Programmation />
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Programmation />} />
+        <Route path='/matiere/:matiereId' element={<Programmation />} />
+        <Route path='/matiere/:matiereId/semaine/:semaineId' element={<Programmation />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
