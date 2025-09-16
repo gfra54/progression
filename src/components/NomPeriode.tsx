@@ -2,7 +2,7 @@ import { PeriodeType } from '../types/periode';
 
 interface NomPeriodePropsType {
   periode: PeriodeType | undefined;
-  nomPeriodeParent: string;
+  nomPeriodeParent: string | undefined;
 }
 
 export default function NomPeriode({ periode, nomPeriodeParent }: NomPeriodePropsType) {
