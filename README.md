@@ -1,5 +1,6 @@
 
 # Outil de visualisation d'une progression
+Une version en ligne de cette app est visible à cette adressse: https://voirprogression.netlify.app/
 
 # Table des matières
 
@@ -21,7 +22,6 @@ Une progression permet à un enseignant de planifier les apprentissages d'une ma
 
 L'outil permet de visualiser les apprentissages d'une semaine donnée dans une des 5 périodes de l'année (une période est composée des plusieurs semaines, balisées par les vacances scolaires). On peut aussi afficher les apprentissages prévus sur toute une periode donnée en une seule page.
 
-Une version en ligne de cette app est visible à cette adressse: https://voirprogression.netlify.app/
 
 
 ## Utilisation de l'IA
