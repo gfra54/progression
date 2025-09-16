@@ -6,9 +6,9 @@ import { ProgrammationType } from '../types/programmation';
 import { useParams } from 'react-router-dom';
 
 export default function Programmation() {
-  const { semaineId } = useParams<{ matiereId: string; semaineId?: string }>();
-  
-  const [data, setData] = useState<ProgrammationType | null>(null);
+    const { semaineId } = useParams<{ matiereId: string; semaineId?: string }>();
+
+    const [data, setData] = useState<ProgrammationType | null>(null);
     useEffect(() => {
         api.get('/programmations/wwdnw9553da0cdypjq2t9p3f')
             .then((res) => setData(res.data.data))
@@ -17,7 +17,9 @@ export default function Programmation() {
 
     if (!data) return <p className="text-center text-gray-500 mt-10">Loading...</p>;
 
-    const crumbs = [];
+    const crumbs = [
+        { label: 'Dashboard', href: '/' }
+    ];
 
     const matiere = data?.matieres[0];
     if (matiere) {
@@ -27,7 +29,7 @@ export default function Programmation() {
     // if (semaine) {
     //     crumbs.push({ label: semaine?.name ?? 'Semaine', href: `/matiere/${matiere?.id}/semaine/${semaine.id}` });
     // }
-    crumbs.push({ label: 'Progression' });
+    crumbs.push({ label: 'Progression', href : '' });
 
 
     return (
@@ -40,7 +42,7 @@ export default function Programmation() {
             </p>
 
             <section className='mb-6'>
-                {<SemaineSelect periodes={data.periodes} matiereId={matiere.id} semaineId={semaineId??''}/>}
+                {<SemaineSelect periodes={data.periodes} matiereId={matiere.id} semaineId={semaineId ?? ''} />}
 
             </section>
 
