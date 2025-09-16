@@ -11,13 +11,6 @@
   - [3. Améliorations futures](#3-améliorations-futures)
   - [4. Modélisation](#4-modélisation)
     - [Les tables](#les-tables)
-      - [Progressions](#progressions)
-      - [Periodes](#periodes)
-      - [Semaines](#semaines)
-      - [Matieres](#matieres)
-      - [Domaines](#domaines)
-      - [Items (Apprentissages pédagogiques)](#items-apprentissages-pédagogiques)
-      - [Programmations](#programmations)
     - [Les routes api potentielles](#les-routes-api-potentielles)
 - [Installation](#installation)
 
