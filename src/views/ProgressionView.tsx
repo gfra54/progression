@@ -14,6 +14,9 @@ import { ItemType } from '../types/item';
 import { ProgressionType } from '../types/progression';
 import { buildCrumbs } from '../utils/crumbUtils';
 
+/**
+ * Charge une progression pédagogique et affiche les domaines et items associés.
+ */
 export default function Progression() {
     const { matiereId, semaineId } = useParams<{ matiereId: string; semaineId?: string }>();
 

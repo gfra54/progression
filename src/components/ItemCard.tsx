@@ -10,6 +10,9 @@ interface ItemCardProps {
   periodes: PeriodeType[];
 }
 
+/**
+ * Présente un item de progression avec les informations de semaine associées.
+ */
 export default function ItemCard({ item, periodes }: ItemCardProps) {
   const semaine = getSemaineById(periodes, item.periodeId);
   const periode = getParentPeriode(periodes, semaine);

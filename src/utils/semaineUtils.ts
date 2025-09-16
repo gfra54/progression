@@ -2,6 +2,9 @@ import { PeriodeType } from '../types/periode';
 
 const semaineCache = new WeakMap<PeriodeType[], Map<string, PeriodeType>>();
 
+/**
+ * Retourne une semaine en la recherchant efficacement dans un cache lié à la liste fournie.
+ */
 export function getSemaineById(periodes: PeriodeType[], semaineId?: string): PeriodeType | undefined {
   if (!semaineId) return undefined;
 

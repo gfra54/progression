@@ -10,6 +10,9 @@ interface SemaineSelectPropsType {
     semaineId: string;
 }
 
+/**
+ * Propose une navigation par périodes pour accéder rapidement aux semaines d'une matière.
+ */
 export default function SemaineSelect({ periodes, matiereId, semaineId }: SemaineSelectPropsType) {
     const navigate = useNavigate();
 

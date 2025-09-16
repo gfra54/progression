@@ -2,7 +2,8 @@ import { PeriodeType } from '../types/periode'; // adjust path if needed
 import { t } from './i18n';
 
 /**
- * Retourne le nom de la période à partir de la semaine donnée
+ * Détermine le libellé de la période parent en parcourant la liste ordonnée des semaines.
+ * La numérotation augmente à chaque reprise d'une "Semaine 1" dans les données fournies.
  */
 export function getParentPeriode(periodes: PeriodeType[], target: PeriodeType | string | undefined): string {
   if (!target) return '';

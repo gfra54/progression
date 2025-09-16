@@ -1,3 +1,6 @@
+/**
+ * Décrit une période de calendrier pédagogique avec ses métadonnées.
+ */
 export interface PeriodeType {
   id: string;
   name: string;

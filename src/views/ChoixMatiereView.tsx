@@ -17,6 +17,9 @@ const matieres: Matiere[] = [
   { id: 'a8d4ddaf-7981-4b83-98c7-506e71c04903', key: 'eps', color: 'bg-teal-100 hover:bg-teal-200 text-teal-800' },
 ];
 
+/**
+ * Offre une vue carte pour sélectionner la matière dont on souhaite consulter la progression.
+ */
 export default function ChoixMatiere() {
   return (
     <main className='max-w-5xl mx-auto p-6'>

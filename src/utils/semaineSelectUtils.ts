@@ -1,6 +1,9 @@
 import { NavigateFunction } from 'react-router-dom';
 import { PeriodeType } from '../types/periode';
 
+/**
+ * Pilote la navigation lorsque l'utilisateur sélectionne une semaine depuis le menu déroulant.
+ */
 export function handleChange(
   e: React.ChangeEvent<HTMLSelectElement>,
   matiereId: string,
@@ -23,6 +26,9 @@ export function handleChange(
   }
 }
 
+/**
+ * Déplace la navigation vers le groupe de semaines demandé et met à jour l'état courant.
+ */
 export function goToGroup(
   index: number,
   grouped: { firstWeek: PeriodeType }[],
