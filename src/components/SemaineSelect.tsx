@@ -93,32 +93,30 @@ export default function SemaineSelect({ periodes, matiereId, semaineId }: Semain
 
             {/* links center */}
             <div className='flex flex-wrap items-center justify-start sm:justify-center gap-2 flex-1'>
+                {/* bouton "Toutes les périodes" */}
                 <Link
                     to={`/matiere/${matiereId}`}
-                    className={`px-3 py-2 rounded-lg border text-xs xs:text-xs font-medium transition-colors flex items-center gap-2 ${currentGroupIndex === null
-                            ? 'bg-blue-600 text-white border-blue-600'
-                            : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200'
-                        }`}
+                    className={`px-3 py-2 rounded-lg border text-xs sm:text-sm transition-colors flex items-center gap-2 bg-gray-100
+      ${currentGroupIndex === null ? 'border-blue-600 font-bold' : 'border-gray-300 font-medium'}
+    `}
                 >
                     📅 {t('periode.all')}
                 </Link>
 
+                {/* boutons périodes */}
                 {grouped.map((group, i) => {
-                    const emojis = ['🍂', '🎄', '❄️', '🌸', '☀️'];
                     return (
                         <Link
                             key={i}
                             to={`/matiere/${matiereId}/semaine/${group.firstWeek.id}`}
-                            className={`px-3 py-2 rounded-lg border text-xs xs:text-xs font-medium transition-colors flex items-center gap-2 ${currentGroupIndex === i
-                                    ? 'bg-blue-600 text-white border-blue-600'
-                                    : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200'
-                                }`}
+                            className={`px-3 py-2 rounded-lg border text-xs sm:text-sm transition-colors flex items-center gap-2 bg-${group.color} ${currentGroupIndex === i ? 'border-blue-600 font-bold' : 'border-gray-300 font-medium'}`}
                         >
-                            {emojis[i]} {group.label}
+                            {group.label}
                         </Link>
                     );
                 })}
             </div>
+
 
             {/* → next (hidden on mobile) */}
             <button
