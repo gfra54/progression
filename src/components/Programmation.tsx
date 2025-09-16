@@ -3,9 +3,12 @@ import api from '../api/axios';
 import Breadcrumbs from './Breadcrumbs';
 import SemaineSelect from './SemaineSelect';
 import { ProgrammationType } from '../types/programmation';
+import { useParams } from 'react-router-dom';
 
 export default function Programmation() {
-    const [data, setData] = useState<ProgrammationType | null>(null);
+  const { semaineId } = useParams<{ matiereId: string; semaineId?: string }>();
+  
+  const [data, setData] = useState<ProgrammationType | null>(null);
     useEffect(() => {
         api.get('/programmations/wwdnw9553da0cdypjq2t9p3f')
             .then((res) => setData(res.data.data))
@@ -37,7 +40,8 @@ export default function Programmation() {
             </p>
 
             <section className='mb-6'>
-                {<SemaineSelect periodes={data.periodes} matiereId={matiere.id} />}
+                {<SemaineSelect periodes={data.periodes} matiereId={matiere.id} semaineId={semaineId??''}/>}
+
             </section>
 
         </main>
