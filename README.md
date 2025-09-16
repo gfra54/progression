@@ -69,6 +69,8 @@ J'aurais fait en sorte de gérer des matières multiples et des domaines multipl
 
 Peut-être faire un peu de ménage car au fil de la création de l'appli il y a peut-être des morceaux de code qui au final ne servent pas, ou pourraient être refactorisés pour être moins verbeux ou moins gourmands en ressources.
 
+Plus globalement  une revue de code par un autre dev senior mieux au clair que moi sur les sujest React/TS serait bénéfique pour améliorer l'ensemble.
+
 
 ### 4. Modélisation
 
