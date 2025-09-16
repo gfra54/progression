@@ -1,4 +1,5 @@
 import { PeriodeType } from '../types/periode'; // adjust path if needed
+import { t } from './i18n';
 
 /**
  * Retourne le nom de la période à partir de la semaine donnée
@@ -15,7 +16,7 @@ export function getParentPeriode(periodes: PeriodeType[], target: PeriodeType | 
     const targetId = typeof target === 'string' ? target : target?.id;
 
     if (p.id === targetId) {
-      return `Periode ${periodeIndex}`;
+      return t('periode.label') + ' ' + periodeIndex;
     }
   }
 
