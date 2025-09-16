@@ -17,3 +17,4 @@ export function getSemaineById(periodes: PeriodeType[], semaineId?: string): Per
 
   return map.get(semaineId);
 }
+

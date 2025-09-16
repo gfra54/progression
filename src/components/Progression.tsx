@@ -25,7 +25,7 @@ export default function Progression() {
             .catch((err) => console.error(err));
     }, []);
 
-    if (!data) return <p className="text-center text-gray-500 mt-10">Loading...</p>;
+    if (!data) return <p className="text-center text-gray-500 mt-10">Chargement en cours...</p>;
 
     const crumbs = [{ label: 'Dashboard', href: '/' }];
     const periodes = data?.periodes ?? [];
@@ -40,7 +40,7 @@ export default function Progression() {
 
 
     return (
-        <main className="max-w-4xl mx-auto p-6 bg-white shadow rounded-lg mt-8">
+        <main className="max-w-4xl mx-auto p-6">
             <Breadcrumbs items={crumbs} />
             <h1 className="text-2xl font-bold text-gray-800 mb-2">{data.name}</h1>
             <p className="text-gray-600 mb-4">{data.shortDescription}</p>
@@ -48,16 +48,13 @@ export default function Progression() {
                 <span className="font-semibold">Date :</span> {new Date(data.date).toLocaleDateString()}
             </p>
 
-            <section className="mb-6">
-                <SemaineSelect periodes={data.periodes} matiereId={matiere?.id ?? ''} semaineId={semaineId ?? ''} />
-            </section>
+            <SemaineSelect periodes={data.periodes} matiereId={matiere?.id ?? ''} semaineId={semaineId ?? ''}/>
 
             <section>
                 {domaines?.map((domaine) => (
                     <div key={domaine.id} className="mb-8">
-                        <h2 className="text-xl font-semibold mb-4 text-gray-700">{domaine.name}</h2>
                         {domaine.items.length > 0 ? (
-                            <ul className="list-none ml-6 space-y-2">
+                            <ul className="list-none space-y-2">
                                 {domaine.items.map((item: ItemType) => {
                                     const semaine = getSemaineById(periodes, item.periodeId);
                                     const periode = getParentPeriode(periodes, semaine);

@@ -5,7 +5,6 @@ import { getParentPeriode } from './periodUtils';
 
 export function prepareDomainesList(semaineId: string | undefined, domaines: Array<DomaineType> | undefined, periodes: Array<PeriodeType>) {
 
-    if (!semaineId) return [];
     if (!domaines) return [];
 
     return domaines?.map((domaine: DomaineType) => {
@@ -19,7 +18,6 @@ export function prepareDomainesList(semaineId: string | undefined, domaines: Arr
         } else {
             filteredItems = domaine.items;
         }
-
         const sortedItems = [...filteredItems].sort((a, b) => {
             const pa = periodes.find((p: PeriodeType) => p.id === a.periodeId);
             const pb = periodes.find((p: PeriodeType) => p.id === b.periodeId);
