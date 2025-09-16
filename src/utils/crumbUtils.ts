@@ -6,6 +6,9 @@ export interface CrumbType {
   href?: string;
 }
 
+/**
+ * Construit la liste des éléments du fil d'Ariane selon la matière et la semaine sélectionnées.
+ */
 export function buildCrumbs(data: ProgressionType, matiereId?: string, semaineId?: string): CrumbType[] {
   const crumbs: CrumbType[] = [{ label: t('common.dashboard'), href: '/' }];
 

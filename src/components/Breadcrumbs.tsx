@@ -1,12 +1,18 @@
+/**
+ * Représente un segment du fil d'Ariane avec un libellé et, si besoin, un lien.
+ */
 export interface CrumbType {
   label: string;
-  href?: string; 
+  href?: string;
 }
 
 interface BreadcrumbsPropsType {
   items: CrumbType[];
 }
 
+/**
+ * Affiche un fil d'Ariane accessible pour contextualiser la navigation.
+ */
 export default function Breadcrumbs({ items }: BreadcrumbsPropsType) {
   return (
     <nav className="text-sm text-gray-600 mb-4" aria-label="Breadcrumb">

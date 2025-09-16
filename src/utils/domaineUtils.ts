@@ -3,6 +3,9 @@ import { ItemType } from '../types/item';
 import { PeriodeType } from '../types/periode';
 import { getParentPeriode } from './periodUtils';
 
+/**
+ * Filtre et trie les domaines pour n'afficher que ceux correspondants à la semaine sélectionnée (ou à toutes les semaines).
+ */
 export function prepareDomainesList(semaineId: string | undefined, domaines: Array<DomaineType> | undefined, periodes: Array<PeriodeType>) {
 
     if (!domaines) return [];
