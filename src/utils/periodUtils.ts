@@ -3,7 +3,8 @@ import { PeriodeType } from '../types/periode'; // adjust path if needed
 /**
  * Retourne le nom de la période à partir de la semaine donnée
  */
-export function getParentPeriode(periodes: PeriodeType[], target: PeriodeType): string {
+export function getParentPeriode(periodes: PeriodeType[], target: PeriodeType | string | undefined): string {
+  if (!target) return '';
   let periodeIndex = 1;
 
   for (const p of periodes) {
@@ -11,7 +12,9 @@ export function getParentPeriode(periodes: PeriodeType[], target: PeriodeType): 
       periodeIndex++;
     }
 
-    if (p.id === target.id) {
+    const targetId = typeof target === 'string' ? target : target?.id;
+
+    if (p.id === targetId) {
       return `Periode ${periodeIndex}`;
     }
   }

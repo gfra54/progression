@@ -1,7 +1,7 @@
 import { PeriodeType } from './periode';
 import { MatiereType } from './matiere';
 
-export interface ProgrammationType {
+export interface ProgressionType {
   id: number;
   name: string;
   shortDescription: string;
